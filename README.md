@@ -3,10 +3,14 @@ StegoMinecraft
 
 Steganography in minecraft maps 
 
+Don't forget --recursive while cloning (else
+git clone --recursive https://github.com/sebeq33/StegoMinecraft.git
+
 using :
 - python 2.7
-- pymclevel 
-- pyqt4 
+- PyQt4 
+- pymclevel (need pyYaml and numpy (-> need borked install (maybe only in 64bits ?) : http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
 
 Personal notes (and TODO):
 
