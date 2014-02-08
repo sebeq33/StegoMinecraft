@@ -1,14 +1,14 @@
 StegoMinecraft
 ==============
 
-Stegonography in minecraft maps 
+Steganography in minecraft maps 
 
 using :
 - python 2.7
 - pymclevel 
 - pyqt4 
 
-Personal notes :
+Personal notes (and TODO):
 
 - Create new map / take existing map
 - Choose input file / type text input to insert
