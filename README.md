@@ -9,7 +9,7 @@ git clone --recursive https://github.com/sebeq33/StegoMinecraft.git
 using :
 - python 2.7
 - PyQt4 
-- pymclevel (need pyYaml and numpy (-> need borked install (maybe only in 64bits ?) : http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+- pymclevel (need pyYaml and numpy (windows -> need a lousy Installation (maybe only in 64bits ?) : http://www.lfd.uci.edu/~gohlke/pythonlibs/)
 
 
 Personal notes (and TODO):
@@ -24,3 +24,4 @@ Personal notes (and TODO):
 - Open FileExplorer in Minecraft save directory
 - Send a map to another ip ? (tcp ?)
 - Command line version / graphical version (Qt)
+- test on linux
