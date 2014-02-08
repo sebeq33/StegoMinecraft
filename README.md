@@ -18,7 +18,7 @@ Personal notes (and TODO):
 - Choose input file / type text input to insert
 - Insert box (from pos1 to pos2) / Insert randomly (using key/seed)
 - Choose which block = 1, which = 0 (default: Bedrock & !Bedrock)
-- Output in a new copy / save in imput
+- Output in a new copy / save in input
 
 - Compression ?
 - Open FileExplorer in Minecraft save directory
