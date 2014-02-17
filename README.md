@@ -27,8 +27,7 @@ Personal notes (and TODO):
 - replace map creation seed
 
 
-Ref :
-
+# Technicals Ref :
 chunks format : 
 - http://minecraft.gamepedia.com/Chunk_format
 
@@ -45,3 +44,13 @@ interesting threads :
 - http://www.minecraftforge.net/wiki/Packet_Handling
 - http://greyminecraftcoder.blogspot.co.uk/2013/10/packets-from-client-to-server.html
 - http://stackoverflow.com/questions/11498701/how-to-send-minecraft-server-packets-from-objective-c
+
+# Papers/Books Ref :
+- Steganography: Past, Present, Future :
+https://www.sans.org/reading-room/whitepapers/stenganography/steganography-past-present-future-552
+- A Game-Theoretic Approach to Content-Adaptive Steganography
+http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
+- Noiseless Steganography: The Key to Covert Communications, By Abdelrahman Desoky
+http://books.google.co.uk/books?id=GyPG-un1ivkC&printsec=frontcover&hl=fr#v=onepage&q&f=false
+- Assured Supraliminal Steganography in Computer Games
+http://pages.cpsc.ucalgary.ca/~asmosuno/WISA_2013.pdf
