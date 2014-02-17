@@ -46,6 +46,8 @@ interesting threads :
 - http://stackoverflow.com/questions/11498701/how-to-send-minecraft-server-packets-from-objective-c
 
 # Papers/Books Ref :
+- Steganography in games: A general methodology and its application to the game of Go
+http://www.seg.inf.uc3m.es/papers/2006cosec.pdf
 - Steganography: Past, Present, Future :
 https://www.sans.org/reading-room/whitepapers/stenganography/steganography-past-present-future-552
 - A Game-Theoretic Approach to Content-Adaptive Steganography
