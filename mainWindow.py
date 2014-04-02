@@ -1,6 +1,8 @@
 import sys
 import os
+import subprocess
 from PyQt4 import QtGui
+from PyQt4 import QtCore
 from pymclevel.mclevelbase import saveFileDir
 
 class MainWindow(QtGui.QWidget):
@@ -43,8 +45,18 @@ class MainWindow(QtGui.QWidget):
     def initMenuBar(self):
         self.menuBar = QtGui.QMenuBar(self)
         self.menuBar.resize(800, 25)
-        fileMenu = self.menuBar.addMenu("File");
-        # fileMenu->addAction(newAct);
+        newAct = QtGui.QAction("Open Minecraft Directory", self)
+        newAct.triggered.connect(self.openMenu);
+        fileMenu = self.menuBar.addMenu("File")
+        fileMenu.addAction(newAct)
+
+    def openMenu(self):
+        dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
+        result = dialog.getExistingDirectory().toLocal8Bit().data()
+        dirName = os.path.basename(result)
+        items = self.listMap.findItems(dirName, QtCore.Qt.MatchExactly)
+        if len(items) > 0:
+            self.listMap.setCurrentItem(items[0])
 
     def getAvailSave(self):
         #return all existing Minecraft save

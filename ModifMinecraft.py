@@ -1,4 +1,3 @@
-# import pymclevel
 import sys
 import os
 from mainWindow import MainWindow
@@ -19,9 +18,7 @@ def accessChunk(world, x, z):
 
 def testModifyMap(world):    
     chunk = accessChunk(world, 0, 0)
-
-    print "NUMBER OF LOADED CHUNKS = " + str(len(list(world.allChunks)))
-    print "CHUNK POSITION = " + str(chunk.chunkPosition);
+    print "CHUNK POSITION = " + str(chunk.chunkPosition)
 
     print "* MODIF *"
     chunk.Blocks[:,:,0:64] = world.materials.Bedrock.ID
@@ -38,18 +35,22 @@ def main(argv):
     for save in getAvailSave():
         print save
     
+    if len(argv) > 1:
+         try:
+             filename = os.path.join(saveFileDir, argv[1])
+             print "FULL FILENAME = \"" + filename +"\""
+             world = mclevel.loadWorld(argv[1]);
+             print "* MAP SUCCESSFULLY LOADED *"
+             print "SEED = " + str(world.RandomSeed)
+             print "NUMBER OF LOADED CHUNKS = " + str(len(list(world.allChunks)))
+
+             #testModifyMap(world)
+             world.close()
+         except IOError, e:
+             print "ERROR = {0} {1}".format(type(e), e.strerror)
+
     window = MainWindow()
     
-    #     try:
-    #         filename = os.path.join(saveFileDir, argv[1])
-    #         print "FULL FILENAME = \"" + filename +"\""
-    #         world = mclevel.loadWorld(argv[1]);
-    #         print "* MAP SUCCESSFULLY LOADED *"
-    #         print "SEED = " + str(world.RandomSeed)
-    #         testModifyMap(world)
-    #         world.close()
-    #     except IOError, e:
-    #         print "ERROR = {0} {1}".format(type(e), e.strerror)
             
 if __name__ == '__main__':
     print "---------------------------------------"
