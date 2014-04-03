@@ -30,13 +30,21 @@ Personal notes (and TODO):
 # Technicals Ref :
 chunks format : 
 - http://minecraft.gamepedia.com/Chunk_format
+commands :
+- http://minecraft.gamepedia.com/Commands
+Varint :
+- https://gist.github.com/thinkofdeath/e975ddee04e9c87faf22
+- https://developers.google.com/protocol-buffers/docs/encoding#varints
+JSON Data :
+- https://gist.github.com/thinkofdeath/e882ce057ed83bac0a1c
 
 minecraft server packets : 
 - http://minecraft.gamepedia.com/Classic_server_protocol
 - http://www.minecraftforge.net/wiki/Packet_Handling
+- http://wiki.vg/Protocol#Chat_Message_2
 
-minecraft python server independant project (2009 - too old) : 
-- https://bitbucket.org/andrewgodwin/myne/src
+minecraft client :
+- https://github.com/ORelio/Minecraft-Console-Client
 
 interesting threads : 
 - http://stackoverflow.com/questions/9520833/how-to-send-packets-to-a-remote-minecraft-classic-server-in-python
@@ -44,6 +52,7 @@ interesting threads :
 - http://www.minecraftforge.net/wiki/Packet_Handling
 - http://greyminecraftcoder.blogspot.co.uk/2013/10/packets-from-client-to-server.html
 - http://stackoverflow.com/questions/11498701/how-to-send-minecraft-server-packets-from-objective-c
+- http://stackoverflow.com/questions/19758270/read-varint-from-linux-sockets
 
 # Papers/Books Ref :
 - Steganography in games: A general methodology and its application to the game of Go
