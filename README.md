@@ -3,7 +3,7 @@ StegoMinecraft
 
 Steganography in minecraft maps. Read "Kent - Project Research 63.pdf" presentations slides of the project.
 
-Don't forget "--recursive" while cloning (ex : "git clone --recursive https://github.com/sebeq33/StegoMinecraft.git")
+Don't forget "--recursive" while cloning (ex : "git clone --recursive https://github.com/sebeq33/StegoMinecraft.git") for pymclevel.
 
 using :
 - python 2.7
@@ -18,35 +18,37 @@ Personal notes (and TODO):
 - Insert box (from pos1 to pos2) / Insert randomly (using key/seed)
 - Choose which block = 1, which = 0 (default: Bedrock & !Bedrock)
 - Output in a new copy / save in input
-
-- Compression ?
+- Choose modifiers (arbitrary offsets in modification with conditions)
 - Open FileExplorer in Minecraft save directory
-- Send a map to another ip ? (tcp ?)
+- Send a map to another ip ? (tcp)
 - Command line version / graphical version (Qt)
-- test on linux
-- replace map creation seed
-
+- Test on linux
+- Replace map creation seed (No -> watch 63.pdf)
+- Compression ?
 
 # Technicals Ref :
-chunks format : 
-- http://minecraft.gamepedia.com/Chunk_format
-commands :
-- http://minecraft.gamepedia.com/Commands
-Varint :
-- https://gist.github.com/thinkofdeath/e975ddee04e9c87faf22
-- https://developers.google.com/protocol-buffers/docs/encoding#varints
-JSON Data :
-- https://gist.github.com/thinkofdeath/e882ce057ed83bac0a1c
-
 minecraft server packets : 
 - http://minecraft.gamepedia.com/Classic_server_protocol
 - http://www.minecraftforge.net/wiki/Packet_Handling
 - http://wiki.vg/Protocol#Chat_Message_2
 
-minecraft client :
+Varint :
+- https://gist.github.com/thinkofdeath/e975ddee04e9c87faf22
+- https://developers.google.com/protocol-buffers/docs/encoding#varints
+
+JSON Data :
+- https://gist.github.com/thinkofdeath/e882ce057ed83bac0a1c
+
+commands :
+- http://minecraft.gamepedia.com/Commands
+
+chunks format : 
+- http://minecraft.gamepedia.com/Chunk_format
+
+minecraft console client (Java):
 - https://github.com/ORelio/Minecraft-Console-Client
 
-interesting threads : 
+# interesting threads : 
 - http://stackoverflow.com/questions/9520833/how-to-send-packets-to-a-remote-minecraft-classic-server-in-python
 - http://wiki.vg/How_to_Write_a_Client
 - http://www.minecraftforge.net/wiki/Packet_Handling
