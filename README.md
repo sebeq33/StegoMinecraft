@@ -18,7 +18,7 @@ Personal notes (and TODO):
 - Insert box (from pos1 to pos2) / Insert randomly (using key/seed)
 - Choose which block = 1, which = 0 (default: Bedrock & !Bedrock)
 - Output in a new copy / save in input
-- Choose modifiers (arbitrary offsets in modification with conditions)
+- Choose modifiers (arbitrary offsets in modification with conditions or limits)
 - Open FileExplorer in Minecraft save directory
 - Send a map to another ip ? (tcp)
 - Command line version / graphical version (Qt)
@@ -59,11 +59,12 @@ minecraft console client (Java):
 # Papers/Books Ref :
 - Steganography in games: A general methodology and its application to the game of Go
 http://www.seg.inf.uc3m.es/papers/2006cosec.pdf
+- A Game-Theoretic Approach to Content-Adaptive Steganography : http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
 - Steganography: Past, Present, Future :
 https://www.sans.org/reading-room/whitepapers/stenganography/steganography-past-present-future-552
-- A Game-Theoretic Approach to Content-Adaptive Steganography
-http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
 - Noiseless Steganography: The Key to Covert Communications, By Abdelrahman Desoky
 http://books.google.co.uk/books?id=GyPG-un1ivkC&printsec=frontcover&hl=fr#v=onepage&q&f=false
 - Assured Supraliminal Steganography in Computer Games
 http://pages.cpsc.ucalgary.ca/~asmosuno/WISA_2013.pdf
+- Unseen: An Overview of Steganography and Presentation of Associated Java Application C-Hide :
+http://www.cse.wustl.edu/~jain/cse571-09/ftp/stegano/
