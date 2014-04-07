@@ -32,6 +32,9 @@ minecraft server packets :
 - http://www.minecraftforge.net/wiki/Packet_Handling
 - http://wiki.vg/Protocol#Chat_Message_2
 
+Authentification/Session :
+- http://wiki.vg/Session
+
 Varint :
 - https://gist.github.com/thinkofdeath/e975ddee04e9c87faf22
 - https://developers.google.com/protocol-buffers/docs/encoding#varints
@@ -46,6 +49,7 @@ chunks format :
 - http://minecraft.gamepedia.com/Chunk_format
 
 minecraft console client (Java):
+- http://www.minecraftforum.net/topic/1314800-winmaclinux-minecraft-console-client-175/
 - https://github.com/ORelio/Minecraft-Console-Client
 
 # interesting threads : 
