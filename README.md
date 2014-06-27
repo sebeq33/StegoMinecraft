@@ -29,8 +29,10 @@ Personal notes (and TODO):
 # Technicals Ref :
 minecraft server packets : 
 - http://minecraft.gamepedia.com/Classic_server_protocol
+- http://wiki.vg/Classic_Protocol
 - http://www.minecraftforge.net/wiki/Packet_Handling
 - http://wiki.vg/Protocol#Chat_Message_2
+- http://wiki.vg/Chat
 
 Authentification/Session :
 - http://wiki.vg/Session
@@ -46,6 +48,7 @@ commands :
 - http://minecraft.gamepedia.com/Commands
 
 chunks format : 
+- http://wiki.vg/Map_Format
 - http://minecraft.gamepedia.com/Chunk_format
 
 minecraft console client (Java):
@@ -53,6 +56,7 @@ minecraft console client (Java):
 - https://github.com/ORelio/Minecraft-Console-Client
 
 # interesting threads : 
+- http://wiki.vg/Main_Page
 - http://stackoverflow.com/questions/9520833/how-to-send-packets-to-a-remote-minecraft-classic-server-in-python
 - http://wiki.vg/How_to_Write_a_Client
 - http://www.minecraftforge.net/wiki/Packet_Handling
