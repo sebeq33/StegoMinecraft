@@ -65,14 +65,42 @@ minecraft console client (Java):
 - http://stackoverflow.com/questions/19758270/read-varint-from-linux-sockets
 
 # Papers/Books Ref :
+
+Links and Downloads :
 - Steganography in games: A general methodology and its application to the game of Go
 http://www.seg.inf.uc3m.es/papers/2006cosec.pdf
-- A Game-Theoretic Approach to Content-Adaptive Steganography : http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
+- A Game-Theoretic Approach to Content-Adaptive Steganography : 
+http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
 - Steganography: Past, Present, Future :
 https://www.sans.org/reading-room/whitepapers/stenganography/steganography-past-present-future-552
 - Noiseless Steganography: The Key to Covert Communications, By Abdelrahman Desoky
 http://books.google.co.uk/books?id=GyPG-un1ivkC&printsec=frontcover&hl=fr#v=onepage&q&f=false
-- Assured Supraliminal Steganography in Computer Games
+- Assured Supraliminal Steganography in Computer Games :
 http://pages.cpsc.ucalgary.ca/~asmosuno/WISA_2013.pdf
 - Unseen: An Overview of Steganography and Presentation of Associated Java Application C-Hide :
 http://www.cse.wustl.edu/~jain/cse571-09/ftp/stegano/
+- On The Limits of Steganography :
+https://www.cl.cam.ac.uk/~rja14/Papers/jsac98-limsteg.pdf
+- Threats of Steganography :
+http://www.gfi.com/blog/threats-steganography/
+- Steganography Revealed :
+http://www.symantec.com/connect/articles/steganography-revealed
+- Linguitic mimicry steganography
+http://www.csc.kth.se/utbildning/kandidatexjobb/datateknik/2010/rapport/bergner_emil_K10059.pdf
+- Information Hiding: Steganography and Watermarking-Attacks and CounterMeasures : 
+http://books.google.co.uk/books?id=OWhPeGK93VcC&lpg=PA75&ots=0hFj7cpOM3&dq=steganography%20weaknesses&hl=fr&pg=PR9#v=onepage&q=steganography%20weaknesses&f=false
+- Attacks on stagographic systems :
+http://simple-steganalysis-suite.googlecode.com/svn-history/r65/wiki/articles/Attacks_on_Steganographic_Systems.pdf
+- Overview: Main Fundamentals for Steganography :
+http://arxiv.org/ftp/arxiv/papers/1003/1003.4086.pdf
+- Steganography And Digital Watermarking :
+https://www.cs.bham.ac.uk/~mdr/teaching/modules03/security/students/SS5/Steganography.pdf
+- Steganography (Existing and attacks) :
+https://www.cl.cam.ac.uk/teaching/0910/R08/work/essay-at443-steganography.pdf
+- New Results on Robustness of Secure Steganography :
+http://www.csi.ucd.ie/files/u79/SPIE06-Mark.pdf
+- Digital Watermarking and Steganography :
+http://booksite.elsevier.com/samplechapters/9780123725851/Sample_Chapters/01~Front_Matter.pdf
+
+
+
