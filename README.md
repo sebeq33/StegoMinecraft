@@ -101,6 +101,7 @@ https://www.cl.cam.ac.uk/teaching/0910/R08/work/essay-at443-steganography.pdf
 http://www.csi.ucd.ie/files/u79/SPIE06-Mark.pdf
 - Digital Watermarking and Steganography :
 http://booksite.elsevier.com/samplechapters/9780123725851/Sample_Chapters/01~Front_Matter.pdf
-
+- Sécurité de l'information wiki : 
+http://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9_de_l'information
 
 
