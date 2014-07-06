@@ -95,6 +95,8 @@ http://www.csi.ucd.ie/files/u79/SPIE06-Mark.pdf
 http://richard.bergmair.eu/pub/hipstego-proc-ihw.pdf
 - Distibuted Steganography :
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6079557
+- Energy efficient distributed steganography for secure communication in wireless multimedia sensor networks :
+http://download.springer.com/static/pdf/736/art%253A10.1007%252Fs11767-013-2111-9.pdf?auth66=1404857990_b0e2f73b28968e6060293c86c4bd3003&ext=.pdf
 - Sécurité de l'information wiki : 
 http://en.wikipedia.org/wiki/Information_security
 http://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9_de_l'information
