@@ -91,9 +91,14 @@ https://www.cs.bham.ac.uk/~mdr/teaching/modules03/security/students/SS5/Steganog
 http://vanilla47.com/PDFs/Cryptography/Steganography/An%20Analysis%20of%20Steganographic%20Techniques.pdf
 - New Results on Robustness of Secure Steganography :
 http://www.csi.ucd.ie/files/u79/SPIE06-Mark.pdf
+- Content-Aware Steganography: About Lazy Prisoners and Narrow-Minded Wardens :
+http://richard.bergmair.eu/pub/hipstego-proc-ihw.pdf
+- Distibuted Steganography :
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6079557
 - Sécurité de l'information wiki : 
 http://en.wikipedia.org/wiki/Information_security
 http://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9_de_l'information
 http://en.wikipedia.org/wiki/Steganography
 http://fr.wikipedia.org/wiki/St%C3%A9ganographie
+http://en.wikipedia.org/wiki/Non-repudiation
 
