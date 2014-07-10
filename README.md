@@ -1,9 +1,9 @@
 StegoMinecraft
 ==============
 
-Steganography in minecraft maps 
+Steganography in minecraft maps. Read "Kent - Project Research 63.pdf" presentations slides of the project.
 
-Don't forget "--recursive" while cloning (ex : "git clone --recursive https://github.com/sebeq33/StegoMinecraft.git")
+Don't forget "--recursive" while cloning (ex : "git clone --recursive https://github.com/sebeq33/StegoMinecraft.git") for pymclevel.
 
 using :
 - python 2.7
@@ -18,35 +18,45 @@ Personal notes (and TODO):
 - Insert box (from pos1 to pos2) / Insert randomly (using key/seed)
 - Choose which block = 1, which = 0 (default: Bedrock & !Bedrock)
 - Output in a new copy / save in input
-
-- Compression ?
+- Choose modifiers (arbitrary offsets in modification with conditions or limits)
 - Open FileExplorer in Minecraft save directory
-- Send a map to another ip ? (tcp ?)
+- Send a map to another ip ? (tcp)
 - Command line version / graphical version (Qt)
-- test on linux
-- replace map creation seed
-
+- Test on linux
+- Replace map creation seed (No -> watch 63.pdf)
+- Compression ?
 
 # Technicals Ref :
-chunks format : 
-- http://minecraft.gamepedia.com/Chunk_format
-commands :
-- http://minecraft.gamepedia.com/Commands
+minecraft server packets : 
+- http://minecraft.gamepedia.com/Classic_server_protocol
+- http://wiki.vg/Classic_Protocol
+- http://www.minecraftforge.net/wiki/Packet_Handling
+- http://wiki.vg/Protocol#Chat_Message_2
+- http://wiki.vg/Chat
+
+Authentification/Session :
+- http://wiki.vg/Session
+
 Varint :
 - https://gist.github.com/thinkofdeath/e975ddee04e9c87faf22
 - https://developers.google.com/protocol-buffers/docs/encoding#varints
+
 JSON Data :
 - https://gist.github.com/thinkofdeath/e882ce057ed83bac0a1c
 
-minecraft server packets : 
-- http://minecraft.gamepedia.com/Classic_server_protocol
-- http://www.minecraftforge.net/wiki/Packet_Handling
-- http://wiki.vg/Protocol#Chat_Message_2
+commands :
+- http://minecraft.gamepedia.com/Commands
 
-minecraft client :
+chunks format : 
+- http://wiki.vg/Map_Format
+- http://minecraft.gamepedia.com/Chunk_format
+
+minecraft console client (Java):
+- http://www.minecraftforum.net/topic/1314800-winmaclinux-minecraft-console-client-175/
 - https://github.com/ORelio/Minecraft-Console-Client
 
-interesting threads : 
+# interesting threads : 
+- http://wiki.vg/Main_Page
 - http://stackoverflow.com/questions/9520833/how-to-send-packets-to-a-remote-minecraft-classic-server-in-python
 - http://wiki.vg/How_to_Write_a_Client
 - http://www.minecraftforge.net/wiki/Packet_Handling
@@ -55,13 +65,42 @@ interesting threads :
 - http://stackoverflow.com/questions/19758270/read-varint-from-linux-sockets
 
 # Papers/Books Ref :
+
+Links and Downloads :
 - Steganography in games: A general methodology and its application to the game of Go
-http://www.seg.inf.uc3m.es/papers/2006cosec.pdf
-- Steganography: Past, Present, Future :
-https://www.sans.org/reading-room/whitepapers/stenganography/steganography-past-present-future-552
-- A Game-Theoretic Approach to Content-Adaptive Steganography
+http://www.sciencedirect.com/science/article/pii/S0167404805002002#
+- A Game-Theoretic Approach to Content-Adaptive Steganography : 
 http://www.ihconference.org/preproceedings/IH2012_07_Schoettle.pdf
 - Noiseless Steganography: The Key to Covert Communications, By Abdelrahman Desoky
 http://books.google.co.uk/books?id=GyPG-un1ivkC&printsec=frontcover&hl=fr#v=onepage&q&f=false
-- Assured Supraliminal Steganography in Computer Games
-http://pages.cpsc.ucalgary.ca/~asmosuno/WISA_2013.pdf
+- Unseen: An Overview of Steganography and Presentation of Associated Java Application C-Hide :
+http://www.cse.wustl.edu/~jain/cse571-09/ftp/stegano/
+- On The Limits of Steganography :
+https://www.cl.cam.ac.uk/~rja14/Papers/jsac98-limsteg.pdf
+- Steganography Revealed :
+http://www.symantec.com/connect/articles/steganography-revealed
+- Linguitic mimicry steganography
+http://www.csc.kth.se/utbildning/kandidatexjobb/datateknik/2010/rapport/bergner_emil_K10059.pdf
+- Information Hiding: Steganography and Watermarking-Attacks and CounterMeasures : 
+http://books.google.co.uk/books?id=OWhPeGK93VcC&lpg=PA75&ots=0hFj7cpOM3&dq=steganography%20weaknesses&hl=fr&pg=PR9#v=onepage&q=steganography%20weaknesses&f=false
+- Overview: Main Fundamentals for Steganography :
+http://arxiv.org/ftp/arxiv/papers/1003/1003.4086.pdf
+- Steganography And Digital Watermarking :
+https://www.cs.bham.ac.uk/~mdr/teaching/modules03/security/students/SS5/Steganography.pdf
+- An Analysis of Steganographic Techniques :
+http://vanilla47.com/PDFs/Cryptography/Steganography/An%20Analysis%20of%20Steganographic%20Techniques.pdf
+- New Results on Robustness of Secure Steganography :
+http://www.csi.ucd.ie/files/u79/SPIE06-Mark.pdf
+- Content-Aware Steganography: About Lazy Prisoners and Narrow-Minded Wardens :
+http://richard.bergmair.eu/pub/hipstego-proc-ihw.pdf
+- Distibuted Steganography :
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6079557
+- Energy efficient distributed steganography for secure communication in wireless multimedia sensor networks :
+http://download.springer.com/static/pdf/736/art%253A10.1007%252Fs11767-013-2111-9.pdf?auth66=1404857990_b0e2f73b28968e6060293c86c4bd3003&ext=.pdf
+- Sécurité de l'information wiki : 
+http://en.wikipedia.org/wiki/Information_security
+http://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9_de_l'information
+http://en.wikipedia.org/wiki/Steganography
+http://fr.wikipedia.org/wiki/St%C3%A9ganographie
+http://en.wikipedia.org/wiki/Non-repudiation
+
