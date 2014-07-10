@@ -1,15 +1,21 @@
+# -*- coding: iso-8859-1 -*-
+
 import sys
 import os
 import subprocess
+import StegoMinecraftBase
+from minecraftUtility import getAvailMaps
+from coverMediaDest import MapDest, ServerDest
+from pymclevel.mclevelbase import saveFileDir
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from pymclevel.mclevelbase import saveFileDir
 
 class MainWindow(QtGui.QWidget):
     def __init__(self):
         self.app = QtGui.QApplication(sys.argv)
         QtGui.QMainWindow.__init__(self)
         
+        self.minecraftBase = StegoMinecraftBase.StegoMinecraftBase()
         self.initWindow()
         self.initList()
         self.initMenuBar()
@@ -37,7 +43,7 @@ class MainWindow(QtGui.QWidget):
         self.listMap.move(5, 55)
         self.listMap.resize(200, 540)
         
-        for m in self.getAvailSave():
+        for m in getAvailMaps():
             self.listMap.addItem(m)
             
         self.listMap.setCurrentRow(0)
@@ -52,13 +58,27 @@ class MainWindow(QtGui.QWidget):
 
     def openMenu(self):
         dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
-        result = dialog.getExistingDirectory().toLocal8Bit().data()
-        dirName = os.path.basename(result)
-        items = self.listMap.findItems(dirName, QtCore.Qt.MatchExactly)
+        result = dialog.getExistingDirectory().toLocal8Bit().data().decode('iso-8859-1')
+
+        try:
+            cover = MapDest(result)
+            self.minecraftBase.coverDestMedia = cover 
+            print "PATH                       : ", self.minecraftBase.coverDestMedia.path
+            print "CURRENT DIMENSION          : ", str(self.minecraftBase.coverDestMedia.selectedDimName)
+            print "SEED                       : ", str(self.minecraftBase.coverDestMedia.seed)
+            print "NB CHUNKS                  : ", str(self.minecraftBase.coverDestMedia.nbChunks)
+            print "NB BLOCK IN CHUNK 0, 0     : ", str(self.minecraftBase.coverDestMedia.sampleNbBlock)
+            print "NB DIF BLOCK IN CHUNK 0, 0 : ", str(self.minecraftBase.coverDestMedia.sampleDif)
+            print "ENTROPY IN CHUNK 0, 0      : ", str(self.minecraftBase.coverDestMedia.sampleEntropy)
+            print "BIOMES IN CHUNK 0, 0       : ", str(self.minecraftBase.coverDestMedia.sampleBiomes)
+
+            for key in self.minecraftBase.coverDestMedia.blocksDict.keys():
+                print "# ", key, ": ", self.minecraftBase.coverDestMedia.blocksDict[key] 
+            print
+        except ValueError, e:
+            print str(e) 
+
+        mapName = os.path.basename(result)        
+        items = self.listMap.findItems(mapName, QtCore.Qt.MatchExactly)
         if len(items) > 0:
             self.listMap.setCurrentItem(items[0])
-
-    def getAvailSave(self):
-        #return all existing Minecraft save
-        return [e for e in os.listdir(saveFileDir) if os.path.isdir(os.path.join(saveFileDir,e))]
-

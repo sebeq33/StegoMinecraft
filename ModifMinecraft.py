@@ -49,7 +49,7 @@ def main(argv):
          except IOError, e:
              print "ERROR = {0} {1}".format(type(e), e.strerror)
 
-    window = MainWindow()
+    #window = MainWindow()
     
             
 if __name__ == '__main__':
