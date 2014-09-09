@@ -1,7 +1,7 @@
 import sys
 import os
-from minecraftUtility import getAvailMaps
-from coverMediaDest import MapDest, ServerDest
+from MinecraftUtility import getAvailMaps, dumpMapDest
+from CoverMediaDest import MapDest, ServerDest
 from pymclevel import mclevel
 from pymclevel.mclevelbase import saveFileDir
 
@@ -13,13 +13,15 @@ class StegoMinecraftBase():
     def __init__(self):
         self.coverMediaDest = None
         self.plainTxtSrc = None
-        self.buffer = None
+        self.buff = None
         self.key = None
         self.options = None
         
+    def loadDefaultLocalMap():
         mapList = getAvailMaps()
         if len(mapList) != 0 :
             mapName = mapList[0]
             self.coverMediaDest = MapDest(os.path.join(saveFileDir, mapName))
             print "coverMedia Dest = " + self.coverMediaDest.path
+            dumpMapDest(self.coverMediaDest);
         

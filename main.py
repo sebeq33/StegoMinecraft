@@ -1,6 +1,6 @@
 import sys
 import os
-from mainWindow import MainWindow
+from MainWindow import MainWindow
 
 def main(argv):
     window = MainWindow()

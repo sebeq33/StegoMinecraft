@@ -4,8 +4,9 @@ import sys
 import os
 import subprocess
 import StegoMinecraftBase
-from minecraftUtility import getAvailMaps
-from coverMediaDest import MapDest, ServerDest
+import TabsPreview
+from MinecraftUtility import getAvailMaps, dumpMapDest
+from CoverMediaDest import MapDest, ServerDest
 from pymclevel.mclevelbase import saveFileDir
 from PyQt4 import QtGui
 from PyQt4 import QtCore
@@ -16,14 +17,14 @@ class MainWindow(QtGui.QWidget):
         QtGui.QMainWindow.__init__(self)
         
         self.minecraftBase = StegoMinecraftBase.StegoMinecraftBase()
-        self.initWindow()
-        self.initList()
-        self.initMenuBar()
+        self._initWindow()
+        self._initMenuBar()
+        self._initMenuTabs()
 
         self.show()
         sys.exit(self.app.exec_())
         
-    def initWindow(self):
+    def _initWindow(self):
         self.setFixedSize(800, 600)
         self.setWindowTitle('StegoMinecraft')
         
@@ -32,29 +33,26 @@ class MainWindow(QtGui.QWidget):
         me = self.geometry()
         self.move((sc.width() - me.width()) / 2,
                   (sc.height() - me.height()) / 2)
-        
-    def initList(self):
-        self.listLbl = QtGui.QLabel(self)
-        self.listLbl.move(5, 30)
-        self.listLbl.setText("Save list : ")
-        self.listLbl.setFont(QtGui.QFont("Time New Roman", 10))
-
-        self.listMap = QtGui.QListWidget(self)
-        self.listMap.move(5, 55)
-        self.listMap.resize(200, 540)
-        
-        for m in getAvailMaps():
-            self.listMap.addItem(m)
             
-        self.listMap.setCurrentRow(0)
-
-    def initMenuBar(self):
+    def _initMenuBar(self):
         self.menuBar = QtGui.QMenuBar(self)
         self.menuBar.resize(800, 25)
         newAct = QtGui.QAction("Open Minecraft Directory", self)
         newAct.triggered.connect(self.openMenu);
         fileMenu = self.menuBar.addMenu("File")
         fileMenu.addAction(newAct)
+        
+    def _initMenuTabs(self):
+        self.menuTabs = QtGui.QTabWidget(self)
+        self.menuTabs.resize(800, 565)
+        self.menuTabs.move(0, 45)
+        self.menuTabs.setTabPosition(QtGui.QTabWidget.North)
+        self.menuTabs.addTab(None, QtCore.QString("preview and dump"))
+        self.menuTabs.addTab(None, QtCore.QString("TEST2"))
+        self.menuTabs.setTabEnabled(0, True)
+        self.listMap = QtGui.QListWidget(self.menuTabs)
+        self.listMap.resize(200, 540)
+        self.listMap.move(5, 5);
 
     def openMenu(self):
         dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
@@ -63,22 +61,9 @@ class MainWindow(QtGui.QWidget):
         try:
             cover = MapDest(result)
             self.minecraftBase.coverDestMedia = cover 
-            print "PATH                       : ", self.minecraftBase.coverDestMedia.path
-            print "CURRENT DIMENSION          : ", str(self.minecraftBase.coverDestMedia.selectedDimName)
-            print "SEED                       : ", str(self.minecraftBase.coverDestMedia.seed)
-            print "NB CHUNKS                  : ", str(self.minecraftBase.coverDestMedia.nbChunks)
-            print "NB BLOCK IN CHUNK 0, 0     : ", str(self.minecraftBase.coverDestMedia.sampleNbBlock)
-            print "NB DIF BLOCK IN CHUNK 0, 0 : ", str(self.minecraftBase.coverDestMedia.sampleDif)
-            print "ENTROPY IN CHUNK 0, 0      : ", str(self.minecraftBase.coverDestMedia.sampleEntropy)
-            print "BIOMES IN CHUNK 0, 0       : ", str(self.minecraftBase.coverDestMedia.sampleBiomes)
-
-            for key in self.minecraftBase.coverDestMedia.blocksDict.keys():
-                print "# ", key, ": ", self.minecraftBase.coverDestMedia.blocksDict[key] 
-            print
+            dumpMapDest(cover);
+            
         except ValueError, e:
             print str(e) 
 
-        mapName = os.path.basename(result)        
-        items = self.listMap.findItems(mapName, QtCore.Qt.MatchExactly)
-        if len(items) > 0:
-            self.listMap.setCurrentItem(items[0])
+    

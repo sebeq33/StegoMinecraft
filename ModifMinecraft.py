@@ -1,8 +1,8 @@
 import sys
 import os
-from mainWindow import MainWindow
 from pymclevel import mclevel
 from pymclevel.mclevelbase import saveFileDir
+from MinecraftUtility import calculateChunkEntropy
 
 #return all existing Minecraft save
 def getAvailSave():
@@ -17,13 +17,25 @@ def accessChunk(world, x, z):
     return world.getChunk(x, z)
 
 def testModifyMap(world):    
-    chunk = accessChunk(world, 0, 0)
+    chunk = accessChunk(world, 2, 0)
     print "CHUNK POSITION = " + str(chunk.chunkPosition)
 
+    print
+    freq, entropy = calculateChunkEntropy(chunk)
+    for key in freq.keys():
+        print "# ", key, ": ", freq[key]
+    print
+    
     print "* MODIF *"
     chunk.Blocks[:,:,0:64] = world.materials.Bedrock.ID
-    world.setPlayerPosition((20, 67, 0))
+    
+    print
+    freq, entropy = calculateChunkEntropy(chunk)
+    for key in freq.keys():
+        print "# ", key, ": ", freq[key]
+    print
 
+    world.setPlayerPosition((20, 67, 0))
     world.generateLights();
     print "* SAVING *"
     world.saveInPlace()
@@ -44,13 +56,10 @@ def main(argv):
              print "SEED = " + str(world.RandomSeed)
              print "NUMBER OF LOADED CHUNKS = " + str(len(list(world.allChunks)))
 
-             #testModifyMap(world)
+             testModifyMap(world)
              world.close()
          except IOError, e:
              print "ERROR = {0} {1}".format(type(e), e.strerror)
-
-    #window = MainWindow()
-    
             
 if __name__ == '__main__':
     print "---------------------------------------"

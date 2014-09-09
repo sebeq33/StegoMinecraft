@@ -1,8 +1,10 @@
+# -*- coding: iso-8859-1 -*-
+
 import sys
 import os
 from pymclevel import mclevel
 from pymclevel.mclevelbase import saveFileDir, ChunkNotPresent
-from minecraftUtility import calculateChunkEntropy, getBiomesList
+from MinecraftUtility import *
 
 # Destination interface
 class CoverMediaDest():
@@ -23,9 +25,10 @@ class MapDest(CoverMediaDest):
         self.seed = self.world.RandomSeed
         self.selectDimension(0)
         self.nbChunks = self.currentDimension.chunkCount
-        self.getChunkInfo(0, 0)
+        self.prepareChunkInfo(0, 0)
+        self.capacity = calculateCapacity(self.currentDimension);
 
-    def getChunkInfo(self, x, z):
+    def prepareChunkInfo(self, x, z):
         try:
             sampleChunk = self.currentDimension.getChunk(x, z)
             self.sampleNbBlock = sampleChunk.Blocks.size 
@@ -38,7 +41,7 @@ class MapDest(CoverMediaDest):
             self.sampleEntropy = 0 
             self.sampleDif = 0
             self.sampleBiomes = []
-            
+    
     def selectDimension(self, nbDim):
         self.selectedDim = nbDim
         if nbDim == 0:
