@@ -11,6 +11,9 @@ class CoverMediaDest():
     def __init__():
         pass
 
+    def selectDimension(self, nbDim):
+        raise NotImplementedError("Empty CoverMediaDest interface, use MapDest or ServerDest")
+    
     def put(self, pos, block):
         raise NotImplementedError("Empty CoverMediaDest interface, use MapDest or ServerDest")
 
@@ -25,22 +28,27 @@ class MapDest(CoverMediaDest):
         self.seed = self.world.RandomSeed
         self.selectDimension(0)
         self.nbChunks = self.currentDimension.chunkCount
+        self.chunkPos = None
         self.prepareChunkInfo(0, 0)
         self.capacity = calculateCapacity(self.currentDimension);
 
     def prepareChunkInfo(self, x, z):
+        if self.chunkPos != None and self.chunkPos[0] == x and self.chunkPos[1] == z:
+            return
         try:
             sampleChunk = self.currentDimension.getChunk(x, z)
             self.sampleNbBlock = sampleChunk.Blocks.size 
             self.blocksDict, self.sampleEntropy = calculateChunkEntropy(sampleChunk) 
             self.sampleDif = len(self.blocksDict)
             self.sampleBiomes = getBiomesList(sampleChunk)
+            self.chunkPos = (x, z)
         except ChunkNotPresent:
             self.sampleNbBlock = 0
             self.blocksDict = {}
             self.sampleEntropy = 0 
             self.sampleDif = 0
             self.sampleBiomes = []
+            self.chunkPos = None
     
     def selectDimension(self, nbDim):
         self.selectedDim = nbDim
@@ -50,7 +58,13 @@ class MapDest(CoverMediaDest):
         else:
             self.currentDimension = self.world.getDimension(nbDim)
             self.selectedDimName = self.currentDimension.displayName
-        
+        self.sampleNbBlock = 0
+        self.blocksDict = {}
+        self.sampleEntropy = 0 
+        self.sampleDif = 0
+        self.sampleBiomes = []
+        self.chunkPos = None
+
     def __del__(self):
         self.close()
 

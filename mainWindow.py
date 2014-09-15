@@ -4,7 +4,7 @@ import sys
 import os
 import subprocess
 import StegoMinecraftBase
-import TabsPreview
+from TabsPreview import TabsPreview
 from MinecraftUtility import getAvailMaps, dumpMapDest
 from CoverMediaDest import MapDest, ServerDest
 from pymclevel.mclevelbase import saveFileDir
@@ -43,16 +43,14 @@ class MainWindow(QtGui.QWidget):
         fileMenu.addAction(newAct)
         
     def _initMenuTabs(self):
+        self.tabs = TabsPreview(self.minecraftBase)
         self.menuTabs = QtGui.QTabWidget(self)
         self.menuTabs.resize(800, 565)
-        self.menuTabs.move(0, 45)
+        self.menuTabs.move(0, 30)
         self.menuTabs.setTabPosition(QtGui.QTabWidget.North)
-        self.menuTabs.addTab(None, QtCore.QString("preview and dump"))
+        self.menuTabs.addTab(self.tabs, QtCore.QString("Preview"))
         self.menuTabs.addTab(None, QtCore.QString("TEST2"))
-        self.menuTabs.setTabEnabled(0, True)
-        self.listMap = QtGui.QListWidget(self.menuTabs)
-        self.listMap.resize(200, 540)
-        self.listMap.move(5, 5);
+        #self.menuTabs.setTabEnabled(0, True)
 
     def openMenu(self):
         dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
@@ -60,9 +58,10 @@ class MainWindow(QtGui.QWidget):
 
         try:
             cover = MapDest(result)
-            self.minecraftBase.coverDestMedia = cover 
-            dumpMapDest(cover);
-            
+            self.minecraftBase.coverMediaDest = cover
+            self.tabs.updateInfo(self.minecraftBase)
+            dumpMapDest(cover)
+
         except ValueError, e:
             print str(e) 
 

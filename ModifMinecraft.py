@@ -17,7 +17,7 @@ def accessChunk(world, x, z):
     return world.getChunk(x, z)
 
 def testModifyMap(world):    
-    chunk = accessChunk(world, 2, 0)
+    chunk = accessChunk(world, 0, 0)
     print "CHUNK POSITION = " + str(chunk.chunkPosition)
 
     print
@@ -27,15 +27,16 @@ def testModifyMap(world):
     print
     
     print "* MODIF *"
-    chunk.Blocks[:,:,0:64] = world.materials.Bedrock.ID
-    
+    chunk.Blocks[:,:,:] = world.materials.Bedrock.ID
+    chunk.dirty = True
+
     print
     freq, entropy = calculateChunkEntropy(chunk)
     for key in freq.keys():
         print "# ", key, ": ", freq[key]
     print
 
-    world.setPlayerPosition((20, 67, 0))
+    world.setPlayerPosition((40, 256, 40))
     world.generateLights();
     print "* SAVING *"
     world.saveInPlace()
