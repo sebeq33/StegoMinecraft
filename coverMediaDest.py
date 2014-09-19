@@ -25,6 +25,7 @@ class MapDest(CoverMediaDest):
         except (IOError, ValueError), e:
             self.world = None
             raise ValueError("Not a Minecraft Map: " + str(e))
+
         self.seed = self.world.RandomSeed
         self.selectDimension(0)
         self.nbChunks = self.currentDimension.chunkCount

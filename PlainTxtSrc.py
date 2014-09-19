@@ -14,8 +14,8 @@ class PlainTxtSrc():
         raise NotImplementedError("Empty PlainTxtSrc interface, use srcTxt or srcFile")
 
 
-class srcTxt(PlainTxtSrc):
-    def __init__(txt = ""):
+class SrcTxt(PlainTxtSrc):
+    def __init__(self, txt = ""):
         self.txt = txt
         pass
 
@@ -30,8 +30,8 @@ class srcTxt(PlainTxtSrc):
     def setTxt(self, txt):
         self.txt = txt
 
-class srcFile(PlainTxtSrc):
-    def __init__(path = None):
+class SrcFile(PlainTxtSrc):
+    def __init__(self, path = None):
         self.path = path
         self.f = None
 
@@ -42,10 +42,10 @@ class srcFile(PlainTxtSrc):
 
     def setFile(self, path):
         self.path = path
-        if (self.f not None):
+        if (self.f != None):
             self.f.close()
             self.f = None
 
     def __del__(self):
-        if (self.f not None):
+        if (self.f != None):
             self.f.close()
