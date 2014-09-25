@@ -114,10 +114,11 @@ class TabPreview(QtGui.QWidget):
 
     def _handleNewDimension(self, index):
         if StegoMinecraftBase.Instance != None and StegoMinecraftBase.Instance.coverMediaDest != None:
+            cover = StegoMinecraftBase.Instance.coverMediaDest
             self.chunkPosXTxt.setText("0")
             self.chunkPosZTxt.setText("0")
-            self._stegoBase.coverMediaDest.selectDimension(index)
-            self._stegoBase.coverMediaDest.prepareChunkInfo(0, 0)
+            cover.selectDimension(index)
+            cover.prepareChunkInfo(0, 0)
             self._updateTable()
 
     def _initBRepartition(self):

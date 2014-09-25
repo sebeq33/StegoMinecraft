@@ -14,6 +14,7 @@ class TabSrc(QtGui.QWidget):
         self.resize(800, 565)
         self._initTxt()
         self._initFile()
+        StegoMinecraftBase.Instance.plainTxtSrc = SrcTxt()
 
     def _initTxt(self):
         self.txtRBtn = QtGui.QRadioButton(self)
@@ -22,9 +23,22 @@ class TabSrc(QtGui.QWidget):
         self.txtRBtn.setText("Input with text :")
         self.txtRBtn.toggled.connect(self.selectTxt)
  
+        self.countLbl = QtGui.QLabel(self)
+        self.countLbl.move(5, 35)
+        self.countLbl.setText("(0) bytes")
+
         self.txtTEdit = QtGui.QTextEdit(self)
-        self.txtTEdit.move(5, 40)
+        self.txtTEdit.move(5, 60)
         self.txtTEdit.resize(780, 200)
+        self.txtTEdit.textChanged.connect(self._handleTxtCountChanged)
+        self.txtTEdit.focusOutEvent = self._handleTxtValueChanged
+
+    def _handleTxtCountChanged(self):
+        self.countLbl.setText("("+ str(self.txtTEdit.document().characterCount() - 1) +") bytes")
+        self.countLbl.adjustSize()
+
+    def _handleTxtValueChanged(self, event):
+        StegoMinecraftBase.Instance.plainTxtSrc.setTxt(self.txtTEdit.document().toPlainText().toLocal8Bit().data())
 
     def selectTxt(self):
         if not self.fileRBtn.isChecked():
@@ -36,6 +50,7 @@ class TabSrc(QtGui.QWidget):
             self.txtTEdit.setEnabled(True)
             StegoMinecraftBase.Instance.plainTxtSrc = SrcTxt()
 
+        
     def selectFile(self):
         if not self.txtRBtn.isChecked():
             self.txtRBtn.setChecked(False)
@@ -58,6 +73,7 @@ class TabSrc(QtGui.QWidget):
         self.fileTxt.resize(670, 25)
         self.fileTxt.setText("")
         self.fileTxt.setEnabled(False)
+        self.fileTxt.setReadOnly(True)
 
         self.fileBtn = QtGui.QPushButton(self)
         self.fileBtn.move(700, 320)
@@ -68,10 +84,11 @@ class TabSrc(QtGui.QWidget):
 
     def _handleNewFile(self):
         fileName = QtGui.QFileDialog.getOpenFileName(self,
-                "Open Address Book", '',
+                "Select input file", '',
                 "All Files (*)").toLocal8Bit().data().decode('iso-8859-1')
 
         if not fileName:
             QtGui.QMessageBox.information(self, 'Info Message', "No File Selected !", QtGui.QMessageBox.Ok)
         else:
             self.fileTxt.setText(fileName)
+            StegoMinecraftBase.Instance.plainTxtSrc.setPath(fileName)

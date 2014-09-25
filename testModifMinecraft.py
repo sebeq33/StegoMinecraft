@@ -27,7 +27,7 @@ def testModifyMap(world):
     print
     
     print "* MODIF *"
-    chunk.Blocks[:,:,:] = world.materials.Bedrock.ID
+    chunk.Blocks[:,:,:] = world.materials.Bedrock.ID ## X, Z, Y
     chunk.dirty = True
 
     print

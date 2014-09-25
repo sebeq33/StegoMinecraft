@@ -26,10 +26,14 @@ class MainWindow(QtGui.QWidget):
         self._initWindow()
         self._initMenuBar()
         self._initMenuTabs()
+        self.closeEvent = self._handleClose
 
         self.show()
         sys.exit(self.app.exec_())
         
+    def _handleClose(self, event):
+        StegoMinecraftBase.Instance.close()
+
     def _initWindow(self):
         self.setFixedSize(800, 600)
         self.setWindowTitle('StegoMinecraft')
