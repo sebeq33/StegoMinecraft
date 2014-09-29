@@ -35,7 +35,7 @@ class MainWindow(QtGui.QWidget):
         StegoMinecraftBase.Instance.close()
 
     def _initWindow(self):
-        self.setFixedSize(800, 600)
+        self.resize(1000, 800) ##TODO USE LAYOUT WITHOUT FIXED SIZE
         self.setWindowTitle('StegoMinecraft')
         
         #center window on screen
@@ -57,8 +57,8 @@ class MainWindow(QtGui.QWidget):
         
     def _initMenuTabs(self):
         self.menuTabs = QtGui.QTabWidget(self)
-        self.menuTabs.resize(800, 565)
-        self.menuTabs.move(0, 30)
+        self.menuTabs.resize(990, 750)
+        self.menuTabs.move(5, 40)
         self.menuTabs.setTabPosition(QtGui.QTabWidget.North)
         
         self.previewTab = TabPreview()

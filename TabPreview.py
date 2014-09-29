@@ -14,7 +14,7 @@ class TabPreview(QtGui.QWidget):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         
-        self.resize(800, 565)
+        self.resize(990, 750)
         self._initLoadButton()
         self._initInfoLabels()
         self._initSeparator()
@@ -41,15 +41,15 @@ class TabPreview(QtGui.QWidget):
 
     def _initLoadButton(self):
         self.loadBtn = QtGui.QPushButton(self)
-        self.loadBtn.move(690, 5)
+        self.loadBtn.move(860, 5)
         self.loadBtn.setText("Load Map")
-        self.loadBtn.resize(100, 30)
+        self.loadBtn.resize(120, 30)
         self.loadBtn.clicked.connect(self._handleNewLevel)
 
         self.loadBtn = QtGui.QPushButton(self)
-        self.loadBtn.move(690, 45)
+        self.loadBtn.move(860, 50)
         self.loadBtn.setText("Load Server")
-        self.loadBtn.resize(100, 30)
+        self.loadBtn.resize(120, 30)
         self.loadBtn.setEnabled(False)
         #self.loadBtn.clicked.connect(self._handleNewServer) ##TODO AFTER THE PROJECT (BONUSà
 
@@ -85,17 +85,17 @@ class TabPreview(QtGui.QWidget):
         
     def _initSeparator(self):
         self.hLine = QtGui.QFrame(self)
-        self.hLine.setGeometry(5, 130, 150, 5)
+        self.hLine.setGeometry(5, 150, 150, 5)
         self.hLine.setFrameShadow(QtGui.QFrame.Raised)
         self.hLine.setFrameStyle(QtGui.QFrame.HLine)
         
     def _initDimensions(self):
         self.dimLbl = QtGui.QLabel(self)
-        self.dimLbl.move(5, 145)
+        self.dimLbl.move(10, 200)
         self.dimLbl.setText("Selected Dimension :")
 
         self.dimSelect = QtGui.QComboBox(self)
-        self.dimSelect.move(150, 145)
+        self.dimSelect.move(170, 200)
         self.dimSelect.addItem(QtCore.QString("Overworld (0)"))
         self.dimSelect.addItem(QtCore.QString("Nether      (1)"))
         self.dimSelect.addItem(QtCore.QString("End           (2)"))
@@ -120,54 +120,54 @@ class TabPreview(QtGui.QWidget):
             cover.prepareChunkInfo(0, 0)
             self.updateInfo()
 
-    def _initBRepartition(self):
+    def _initBRepartition(self, x = 0, y = 250):
         self.dictLbl = QtGui.QLabel(self)
-        self.dictLbl.move(5, 190)
+        self.dictLbl.move(x + 10, y)
         self.dictLbl.setText("Selected preview in Chunk(X, Z) :")
 
         self.chunkPosXTxt = QtGui.QLineEdit(self)
-        self.chunkPosXTxt.move(205, 190)
-        self.chunkPosXTxt.resize(40, 20)
+        self.chunkPosXTxt.move(x + 250, y)
+        self.chunkPosXTxt.resize(50, 20)
         self.chunkPosXTxt.setText("0")
         self.chunkPosXTxt.setEnabled(False)
 
         self.chunkPosZTxt = QtGui.QLineEdit(self)
-        self.chunkPosZTxt.move(255, 190)
-        self.chunkPosZTxt.resize(40, 20)
+        self.chunkPosZTxt.move(x + 320, y)
+        self.chunkPosZTxt.resize(50, 20)
         self.chunkPosZTxt.setText("0")
         self.chunkPosZTxt.setEnabled(False)
         
         self.chunkBtn = QtGui.QPushButton(self)
-        self.chunkBtn.move(305, 190)
+        self.chunkBtn.move(x + 390, y)
         self.chunkBtn.setText(">")
-        self.chunkBtn.resize(30, 20)
+        self.chunkBtn.resize(40, 20)
         self.chunkBtn.clicked.connect(self._handleNewChunk)
         self.chunkBtn.setEnabled(False)
         
         self.nbBlockLbl = QtGui.QLabel(self)
-        self.nbBlockLbl.move(370, 190)
+        self.nbBlockLbl.move(x + 10, y + 50)
         self.nbBlockLbl.setText("Nb Blocks in Chunk :")
         self.nbBlockValueLbl = QtGui.QLabel(self)
-        self.nbBlockValueLbl.move(500, 190)
+        self.nbBlockValueLbl.move(x + 200, y + 50)
         
         self.nbDifLbl = QtGui.QLabel(self)
-        self.nbDifLbl.move(560, 190)
+        self.nbDifLbl.move(x + 300, y + 50)
         self.nbDifLbl.setText("Nb unique Blocks in Chunk :")
         self.nbDifValueLbl = QtGui.QLabel(self)
-        self.nbDifValueLbl.move(730, 190)
+        self.nbDifValueLbl.move(x + 500, y + 50)
 
         self.entLbl = QtGui.QLabel(self)
-        self.entLbl.move(370, 220)
+        self.entLbl.move(x + 10, y + 100)
         self.entLbl.setText("Entropy calculated in Chunk :")
         self.entValueLbl = QtGui.QLabel(self)
-        self.entValueLbl.move(540, 220)
+        self.entValueLbl.move(x + 200, y + 100)
         
         self.repLbl = QtGui.QLabel(self)
-        self.repLbl.move(10, 260)
+        self.repLbl.move(x + 10, y + 150)
         self.repLbl.setText("Preview blocks repartition :")
 
         self.repTab = QtGui.QTableWidget(self)
-        self.repTab.move(20, 290)
+        self.repTab.move(x + 20, y + 200)
         self.repTab.resize(400, 240)
         self.repTab.setColumnCount(2)
         self.repTab.setHorizontalHeaderLabels(['Block','Quantity'])
@@ -176,13 +176,14 @@ class TabPreview(QtGui.QWidget):
         self.repTab.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         
         self.repLbl = QtGui.QLabel(self)
-        self.repLbl.move(460, 260)
+        self.repLbl.move(x + 460, y + 150)
         self.repLbl.setText("Preview biomes repartition :")
 
         self.biomeTab = QtGui.QTableWidget(self)
-        self.biomeTab.move(470, 290)
+        self.biomeTab.move(x + 470, y + 200)
         self.biomeTab.resize(300, 240)
         self.biomeTab.setColumnCount(1)
+        self.biomeTab.horizontalHeader().resizeSection(0, 200);
         self.biomeTab.setHorizontalHeaderLabels(['Biome found'])
         self.biomeTab.setSelectionMode(QtGui.QTableWidget.NoSelection)
         self.biomeTab.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
