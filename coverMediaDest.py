@@ -9,7 +9,18 @@ from MinecraftUtility import *
 # Destination interface
 class CoverMediaDest():
     def __init__():
-        pass
+        self.seed = self.world.RandomSeed
+        self.nbChunks = 0
+        self.chunkPos = (0, 0)
+        self.capacity = (0, 0, 0, 0)
+        self.sampleNbBlock = 0
+        self.blocksDict = {}
+        self.sampleEntropy = 0
+        self.sampleDif = 0
+        self.sampleBiomes = []
+        self.selectedDim = None
+        self.currentDimension = None
+        self.selectedDimName = ""
 
     def selectDimension(self, nbDim):
         raise NotImplementedError("Empty CoverMediaDest interface, use MapDest or ServerDest")
@@ -35,11 +46,11 @@ class MapDest(CoverMediaDest):
             raise ValueError("Not a Minecraft Map: " + str(e))
 
         self.seed = self.world.RandomSeed
+        self.selectedDim = None
         self.selectDimension(0)
         self.nbChunks = self.currentDimension.chunkCount
         self.chunkPos = None
         self.prepareChunkInfo(0, 0)
-        self.capacity = calculateCapacity(self.currentDimension);
         self.modified = False
 
     def prepareChunkInfo(self, x, z):
@@ -61,6 +72,8 @@ class MapDest(CoverMediaDest):
             self.chunkPos = None
 
     def selectDimension(self, nbDim):
+        if self.selectedDim != None and nbDim == self.selectedDim:
+            return
         self.selectedDim = nbDim
         if nbDim == 0:
             self.currentDimension = self.world
@@ -74,9 +87,12 @@ class MapDest(CoverMediaDest):
         self.sampleDif = 0
         self.sampleBiomes = []
         self.chunkPos = None
+        spawnX, _, spawnZ = self.currentDimension.playerSpawnPosition()
+        self.capacity = calculateCapacity(self.currentDimension, 
+                                          spawnX / 16, 
+                                          spawnZ / 16);
 
     def close(self):
-        print "CLEAN CLOSE (coverMediaDest.close())"
         if self.world != None:
             if self.modified == True:
                 self.currentDimension.saveInPlace()

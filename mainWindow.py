@@ -47,10 +47,13 @@ class MainWindow(QtGui.QWidget):
     def _initMenuBar(self):
         self.menuBar = QtGui.QMenuBar(self)
         self.menuBar.resize(800, 25)
-        newAct = QtGui.QAction("Open Minecraft Directory", self)
-        newAct.triggered.connect(self.openMenu);
+        openDirAct = QtGui.QAction("Open Minecraft Directory", self)
+        openDirAct.triggered.connect(self.openMapDest);
+        debugAct = QtGui.QAction("Debug", self)
+        debugAct.triggered.connect(self.debug);
         fileMenu = self.menuBar.addMenu("File")
-        fileMenu.addAction(newAct)
+        fileMenu.addAction(openDirAct)
+        fileMenu.addAction(debugAct)
         
     def _initMenuTabs(self):
         self.menuTabs = QtGui.QTabWidget(self)
@@ -70,19 +73,33 @@ class MainWindow(QtGui.QWidget):
         self.menuTabs.addTab(self.optionsAdvTab, QtCore.QString("Options (Adv)"))
         self.menuTabs.addTab(self.securityTab, QtCore.QString("Security"))
         self.menuTabs.addTab(self.processTab, QtCore.QString("Process"))
+        self.menuTabs.currentChanged.connect(self._handleNewTab)
 
-    def openMenu(self):
+    def _handleNewTab(self):
+        self.menuTabs.currentWidget().setFocus() ## mandatory to make focusIn event works
+
+    def openMapDest(self):
         dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
         result = dialog.getExistingDirectory().toLocal8Bit().data().decode('iso-8859-1')
 
         try:
             cover = MapDest(result)
             StegoMinecraftBase.Instance.coverMediaDest = cover
-            self.previewTab.updateInfo()
+            self.updateInfo()
             dumpMapDest(cover)
 
         except ValueError, e:
             print str(e)
             QtGui.QMessageBox.information(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
 
-    
+    def updateInfo(self):
+        self.previewTab.updateInfo()
+        self.optionsTab.updateInfo()
+
+    def debug(self):
+        msg = str(StegoMinecraftBase.Instance) + "\n"
+        msg += str(StegoMinecraftBase.Instance.coverMediaDest) + "\n"
+        msg += str(StegoMinecraftBase.Instance.plainTxtSrc) + "\n"
+        msg += str(StegoMinecraftBase.Instance.limits) + "\n"
+        msg += str(StegoMinecraftBase.Instance.options)
+        QtGui.QMessageBox.information(self, 'Info Message', msg, QtGui.QMessageBox.Ok)

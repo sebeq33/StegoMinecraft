@@ -43,7 +43,6 @@ class TabSrc(QtGui.QWidget):
     def selectTxt(self):
         if not self.fileRBtn.isChecked():
             self.fileRBtn.setChecked(False)
-            #self.txtRBtn.setChecked(True)
 
             self.fileTxt.setEnabled(False)
             self.fileBtn.setEnabled(False)
@@ -54,7 +53,6 @@ class TabSrc(QtGui.QWidget):
     def selectFile(self):
         if not self.txtRBtn.isChecked():
             self.txtRBtn.setChecked(False)
-            #self.fileRBtn.setChecked(True)
 
             self.fileTxt.setEnabled(True)
             self.fileBtn.setEnabled(True)

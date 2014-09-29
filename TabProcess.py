@@ -39,6 +39,7 @@ class TabProcess(QtGui.QWidget):
         self.outFileTxt.move(5, 300)
         self.outFileTxt.resize(640, 30)
         self.outFileTxt.setText("Result.txt")
+        self.outFileTxt.setReadOnly(True)
 
         self.fileBtn = QtGui.QPushButton(self)
         self.fileBtn.move(670, 300)
@@ -51,10 +52,10 @@ class TabProcess(QtGui.QWidget):
         self.readLbl.setText("Nb bytes to read : ")
         self.readLbl.resize(120, 30)
         
-        self.readFileTxt = QtGui.QLineEdit(self)
-        self.readFileTxt.move(140, 350)
-        self.readFileTxt.resize(100, 30)
-        self.readFileTxt.setText("0")
+        self.readFileSB = QtGui.QSpinBox(self)
+        self.readFileSB.move(140, 350)
+        self.readFileSB.resize(100, 20)
+        self.readFileSB.setRange(0, 2000000)
 
         self.retrBtn = QtGui.QPushButton(self)
         self.retrBtn.move(700, 500)
@@ -67,7 +68,7 @@ class TabProcess(QtGui.QWidget):
                 "Select output file", '',
                 "All Files (*)").toLocal8Bit().data().decode('iso-8859-1')
 
-        if fileName != None:
+        if fileName != None and fileName != "":
             self.outFileTxt.setText(fileName)
         else:
             QtGui.QMessageBox.warning(self, 'Info Message', "No File Selected !", QtGui.QMessageBox.Ok)
@@ -75,34 +76,35 @@ class TabProcess(QtGui.QWidget):
     def _launchProcess(self):
         self.launchBtn.setEnabled(False)
         self.launchBtn.repaint()
-        if StegoMinecraftBase.Instance.isProcessReady():
-            try:
+        try:
+            if StegoMinecraftBase.Instance.isProcessReady():
                 nb = StegoMinecraftBase.Instance.launchProcess()
                 msg = "Finished !\n" + str(nb) + " Byte(s) inserted"
                 QtGui.QMessageBox.information(self, 'Info Message', msg, QtGui.QMessageBox.Ok)
-            except Exception, e:
-                print str(e)
-                QtGui.QMessageBox.warning(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
+        except ChunkNotPresent, e:
+            msg = "Wrong limits, reached empty chunk" + str(e)
+            print msg
+            QtGui.QMessageBox.warning(self, 'Info Message', msg, QtGui.QMessageBox.Ok)
+        except Exception, e:
+            print str(e)
+            QtGui.QMessageBox.warning(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
         self.launchBtn.setEnabled(True)
 
     def _retrieveProcess(self):
         self.retrBtn.setEnabled(False)
         self.retrBtn.repaint()
-        if StegoMinecraftBase.Instance.isRetrieveReady():
-            try:
-                nbBytes, valid = self.readFileTxt.text().toInt()
+        try:
+            if StegoMinecraftBase.Instance.isRetrieveReady():
+                nbBytes = self.readFileSB.value()
                 path = self.outFileTxt.text().toLocal8Bit().data().decode('iso-8859-1')
-                if not valid:
-                    raise ValueError("Nb Bytes is not a number")
-
                 StegoMinecraftBase.Instance.retrieveProcess(path, nbBytes)
                 msg = "Finished !\n" + str(nbBytes) + " Byte(s) retrieved\nOutput file : " + path
                 QtGui.QMessageBox.information(self, 'Info Message', msg, QtGui.QMessageBox.Ok)
-            except ChunkNotPresent, e:
-                msg = "Wrong limits, reached empty chunk"
-                print msg
-                QtGui.QMessageBox.warning(self, 'Info Message', msg, QtGui.QMessageBox.Ok)
-            except Exception, e:
-                print str(e)
-                QtGui.QMessageBox.warning(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
+        except ChunkNotPresent, e:
+            msg = "Wrong limits, reached empty chunk" + str(e)
+            print msg
+            QtGui.QMessageBox.warning(self, 'Info Message', msg, QtGui.QMessageBox.Ok)
+        except Exception, e:
+            print str(e)
+            QtGui.QMessageBox.warning(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
         self.retrBtn.setEnabled(True)

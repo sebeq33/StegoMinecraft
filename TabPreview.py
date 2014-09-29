@@ -13,7 +13,7 @@ from PyQt4 import QtCore
 class TabPreview(QtGui.QWidget):
     def __init__(self):
         QtGui.QWidget.__init__(self)
-
+        
         self.resize(800, 565)
         self._initLoadButton()
         self._initInfoLabels()
@@ -54,19 +54,9 @@ class TabPreview(QtGui.QWidget):
         #self.loadBtn.clicked.connect(self._handleNewServer) ##TODO AFTER THE PROJECT (BONUSà
 
     def _handleNewLevel(self):
-        ## copied from MainWindow loadMap
-        dialog = QtGui.QFileDialog(self, 'Browse', saveFileDir)
-        result = dialog.getExistingDirectory().toLocal8Bit().data().decode('iso-8859-1')
-        
-        try:
-            cover = MapDest(result)
-            StegoMinecraftBase.Instance.coverMediaDest = cover
-            self.updateInfo()
-            dumpMapDest(cover)
-            
-        except ValueError, e:
-            print str(e)
-            QtGui.QMessageBox.information(self, 'Info Message', str(e), QtGui.QMessageBox.Ok)
+        window = self.nativeParentWidget()
+        if window != None:
+            window.openMapDest()
 
     def _initInfoLabels(self):
         self.pathLbl = QtGui.QLabel(self)
@@ -111,15 +101,24 @@ class TabPreview(QtGui.QWidget):
         self.dimSelect.addItem(QtCore.QString("End           (2)"))
         self.dimSelect.currentIndexChanged.connect(self._handleNewDimension)
         self.dimSelect.setEnabled(False)
+    
+        self.focusInEvent = self._handleFocusIn
+
+    def _handleFocusIn(self, event):
+        if StegoMinecraftBase.Instance.coverMediaDest != None:
+            cover = StegoMinecraftBase.Instance.coverMediaDest
+            if (cover.selectedDim != self.dimSelect.currentIndex()):
+                self.dimSelect.setCurrentIndex(cover.selectedDim)
+                self._handleNewDimension(cover.selectedDim)
 
     def _handleNewDimension(self, index):
-        if StegoMinecraftBase.Instance != None and StegoMinecraftBase.Instance.coverMediaDest != None:
+        if StegoMinecraftBase.Instance.coverMediaDest != None:
             cover = StegoMinecraftBase.Instance.coverMediaDest
             self.chunkPosXTxt.setText("0")
             self.chunkPosZTxt.setText("0")
             cover.selectDimension(index)
             cover.prepareChunkInfo(0, 0)
-            self._updateTable()
+            self.updateInfo()
 
     def _initBRepartition(self):
         self.dictLbl = QtGui.QLabel(self)
@@ -189,7 +188,7 @@ class TabPreview(QtGui.QWidget):
         self.biomeTab.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
 
     def _handleNewChunk(self):
-        if StegoMinecraftBase.Instance != None and StegoMinecraftBase.Instance.coverMediaDest != None:
+        if StegoMinecraftBase.Instance.coverMediaDest != None:
             posX = self.chunkPosXTxt.text().toInt()
             posZ = self.chunkPosZTxt.text().toInt()
             if (posX[1] == True and posZ[1] == True):
@@ -198,7 +197,7 @@ class TabPreview(QtGui.QWidget):
                 self._updateTable()
 
     def _updateTable(self):
-        if StegoMinecraftBase.Instance != None and StegoMinecraftBase.Instance.coverMediaDest != None:
+        if StegoMinecraftBase.Instance.coverMediaDest != None:
             cover = StegoMinecraftBase.Instance.coverMediaDest
             self.nbBlockValueLbl.setText(str(cover.sampleNbBlock))
             self.nbBlockValueLbl.adjustSize()

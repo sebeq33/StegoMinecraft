@@ -27,7 +27,7 @@ def testModifyMap(world):
     print
     
     print "* MODIF *"
-    chunk.Blocks[:,:,:] = world.materials.Bedrock.ID ## X, Z, Y
+    chunk.Blocks[:,:,256] = world.materials.Bedrock.ID ## X, Z, Y
     chunk.dirty = True
 
     print
@@ -41,10 +41,19 @@ def testModifyMap(world):
     print "* SAVING *"
     world.saveInPlace()
 
-def main(argv):
-    print "SAVE FILE DIR = \"" + saveFileDir +"\""
+def testCapacity(world):
+    print "* TEST CAPACITY"
+    print "SPAWN = ", str(world.playerSpawnPosition())
+    # startx = -13; endx = 15; startz = -6; endz = 8
+    startx = -23; endx = -18; startz = 12; endz = 18
+    for x in range(startx, endx):
+        for z in range(startz, endz):
+            print "Chunk (", x, ", ", z, ") ", world.containsChunk(x, z)
 
-    print "SAVE(S) AVAILABLE = "
+def main(argv):
+    print "* SAVE FILE DIR = \"" + saveFileDir +"\""
+
+    print "* SAVE(S) AVAILABLE = "
     for save in getAvailSave():
         print save
     
@@ -58,6 +67,7 @@ def main(argv):
              print "NUMBER OF LOADED CHUNKS = " + str(len(list(world.allChunks)))
 
              testModifyMap(world)
+             # testCapacity(world)
              world.close()
          except IOError, e:
              print "ERROR = {0} {1}".format(type(e), e.strerror)

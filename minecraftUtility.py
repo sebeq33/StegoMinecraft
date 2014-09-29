@@ -43,47 +43,43 @@ def getBiomesList(chunk):
                 biomeList.append(biome_types[z])
     return (biomeList)
 
-def calculateCapacity(currentDimension):
+def calculateCapacity(currentDimension, startX = 0, startZ = 0):
     endLeft = False; endRight = False; endTop = False; endBottom = False
-    startX = 0; startY = 0; sizeX = 0; sizeY = 0
-    checkDirection = 0
+    sizeX = 0; sizeZ = 0
     while not endLeft or not endRight or not endTop or not endBottom:
         ## Check one side at a time for emptyChunk, determine starts and max chunk size
-        if checkDirection == 0 and not endLeft:             ## Left
-            if chunksEmpty(currentDimension, startX, startY, sizeX, 1):
+        if not endRight:        ## Right
+            if chunksEmpty(currentDimension, startX + sizeX, startZ, 1, sizeZ):
+                endRight = True
+            else:
+                sizeX += 1
+        if not endBottom:       ## Bottom
+            if chunksEmpty(currentDimension, startX, startZ + sizeZ, sizeX, 1):
+                endBottom = True
+            else:
+                sizeZ += 1
+        if not endLeft:         ## Left
+            if chunksEmpty(currentDimension, startX - 1, startZ, 1, sizeZ):
                 endLeft = True
             else:
                 startX -= 1
                 sizeX += 1
-        elif checkDirection == 1 and not endRight:       ## Right
-            if chunksEmpty(currentDimension, startX + sizeX, startY, sizeX, 1):
-                endRight = True
-            else:
-                sizeX += 1
-        elif checkDirection == 2 and not endBottom:      ## Bottom
-            if chunksEmpty(currentDimension, startX, startY, 1, sizeY):
-                endBottom = True
-            else:
-                startY -= 1
-                sizeY += 1
-        elif not endTop:                                ## Top
-            if chunksEmpty(currentDimension, startY + sizeY, startY, 1, sizeY):
+        if not endTop:          ## Top
+            if chunksEmpty(currentDimension, startX, startZ - 1, sizeX, 1):
                 endTop = True
             else:
-                sizeY += 1
-        checkDirection += 1
-        if checkDirection > 3:
-            checkDirection = 0
+                startZ -= 1
+                sizeZ += 1
     ##END LOOP
-    return (startX, startY, sizeX, sizeY);
+    return (startX, startZ, sizeX, sizeZ);
 
 ##
 ## Check if one of the asked chunks in range is empty
 ##
-def chunksEmpty(dimension, startX, startY, sizeX, sizeY):
+def chunksEmpty(dimension, startX, startZ, sizeX, sizeZ):
     for x in range(startX, startX + sizeX):
-        for y in range(startY, startY + sizeY):
-            if not dimension.containsChunk(x, y):
+        for z in range(startZ, startZ + sizeZ):
+            if not dimension.containsChunk(x, z):
                 return True
     return False
 
@@ -97,9 +93,9 @@ def dumpMapDest(mapDest):
     print "SEED                       : ", str(mapDest.seed)
     print "NB CHUNKS                  : ", str(mapDest.nbChunks)
     print "CAPACITY startX            : ", str(mapDest.capacity[0])
-    print "         startY            : ", str(mapDest.capacity[1])
+    print "         startZ            : ", str(mapDest.capacity[1])
     print "         sizeX             : ", str(mapDest.capacity[2])
-    print "         sizeY             : ", str(mapDest.capacity[3])
+    print "         sizeZ             : ", str(mapDest.capacity[3])
     print
     print "NB BLOCK IN CHUNK 0, 0     : ", str(mapDest.sampleNbBlock)
     print "NB DIF BLOCK IN CHUNK 0, 0 : ", str(mapDest.sampleDif)

@@ -5,6 +5,7 @@ from TripleRandomSafe import TripleRandomSafe
 from MinecraftUtility import getAvailMaps, dumpMapDest
 from CoverMediaDest import MapDest, ServerDest
 from PlainTxtSrc import SrcFile, SrcTxt
+from StegoOptions import StegoOptions
 from pymclevel import mclevel
 from pymclevel.mclevelbase import saveFileDir, ChunkNotPresent
 
@@ -20,25 +21,31 @@ class StegoMinecraftBase():
         self.plainTxtSrc = None
         self.limits = None
         self.key = None
-        self.options = None
+        self.options = StegoOptions
 
     def isProcessReady(self):
         if self.coverMediaDest == None:
-            return False
-        if self.plainTxtSrc == None:
-            return False
+            raise ValueError("Destination Media not set")
+        if self.plainTxtSrc == None or self.plainTxtSrc.count() == 0:
+            raise ValueError("Source Empty")
+        if self.limits == None:
+            raise ValueError("Limit not set")
+        if self.key == None:
+            raise ValueError("Key password not set")
         ##TO COMPLETE / FINISH
         return True
 
     def isRetrieveReady(self):
         if self.coverMediaDest == None:
-            return False
+            raise ValueError("Destination Media not set")
+        if self.limits == None:
+            raise ValueError("Limit not set")
+        if self.key == None:
+            raise ValueError("Key password not set")
+        ##TO COMPLETE / FINISH
         return True
 
     def launchProcess(self):
-        self.key = 0
-        self.limits = ((-160, 160), (2, 5), (-160, 160))
-
         count = 0
         end = False
         triple = TripleRandomSafe(self.key)
@@ -47,9 +54,9 @@ class StegoMinecraftBase():
             for char in buff:
                 count += 1
                 for j in range(0, 8):
+                    block = None
                     bit = (ord(char) >> j) & 1 
                     x, y, z = triple.get3DPos(self.limits[0], self.limits[1], self.limits[2])
-                    block = None
                     if bit == 1:
                         block = self.coverMediaDest.currentDimension.materials.Bedrock.ID
                     else:
@@ -62,9 +69,6 @@ class StegoMinecraftBase():
         return count
 
     def retrieveProcess(self, pathDest, qtt):
-        self.key = 0
-        self.limits = ((-160, 160),(2, 5),(-160, 160))
-
         fileDest = open(pathDest, 'wb') ## write binary
         triple = TripleRandomSafe(self.key)
         buff = ""
