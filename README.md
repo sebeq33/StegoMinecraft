@@ -11,6 +11,9 @@ using :
 - PyQt4 
 - pymclevel (need pyYaml and numpy (windows -> need a lousy Installation (maybe only in 64bits ?) : http://www.lfd.uci.edu/~gohlke/pythonlibs/)
 
+Compile with:
+- pyInstaller 2.0 using Main.spec
+
 
 Personal notes (and TODO):
 
