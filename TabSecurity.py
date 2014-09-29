@@ -20,10 +20,10 @@ class TabSecurity(QtGui.QWidget):
         self.passLbl = QtGui.QLabel(self)
         self.passLbl.move(5, 10)
         self.passLbl.setText("Set a password (to create hash): ")
-        self.passLbl.resize(200, 30)
+        self.passLbl.resize(290, 30)
 
         self.countLbl = QtGui.QLabel(self)
-        self.countLbl.move(220, 15)
+        self.countLbl.move(350, 15)
         self.countLbl.setText("(0) bytes")
         self.countLbl.resize(200, 20)
 
