@@ -1,6 +1,8 @@
 ﻿StegoMinecraft
 ==============
 
+TODO graphical interface / some features for fun
+
 Steganography in minecraft maps. Read "Kent - Project Research 63.pdf" presentations slides of the project.
 
 Don't forget "--recursive" while cloning (ex : "git clone --recursive https://github.com/sebeq33/StegoMinecraft.git") for pymclevel.
